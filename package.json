@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "Websanova",
+    "url": "http://websanova.com",
+    "username": "websanova",
+    "email": "rob@websanova.com"
+  },
+  "dependencies": {},
+  "description": "Simple toggle plugin for Vue.js.",
+  "licenses": "MIT, GPL",
+  "devDependencies": {},
+  "keywords": ["vue", "vue.js", "toggle", "show", "hide", "visible"],
+  "main": "src/index.js",
+  "name": "@websanova/vue-toggle",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/websanova/vue-toggle"
+  },
+  "version": "0.1.2"
+}
