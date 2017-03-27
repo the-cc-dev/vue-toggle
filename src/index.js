@@ -10,13 +10,48 @@ module.exports = (function () {
         });
     }
 
+    function _getObj(name) {
+        var i, ii, obj;
+
+        name = _init.call(this, name).split('.');
+
+        obj = this.watch.data;
+
+        for (i = 0, ii = name.length; i < ii; i++ ) {
+            obj = obj[name[i]];
+
+            if ( ! obj) {
+                return undefined;
+            }
+        }
+
+        return obj;
+    }
+
     function _init(name) {
+        var i, ii, obj, _name;
+
         name = _toCamelCase(name);
 
-        if ( ! this.watch.data[name]) {
-            this.options.Vue.set(this.watch.data, name, {
-                visible: false
-            });
+        _name = name.split('.');
+
+        obj = this.watch.data;
+
+        for (i = 0, ii = _name.length; i < ii; i++) {
+            if ( ! obj[_name[i]]) {
+
+                // If last one.
+                if (i + 1 === ii) {
+                    this.options.Vue.set(obj, _name[i], {
+                        visible: false
+                    });
+                }
+                else {
+                    this.options.Vue.set(obj, _name[i], {});
+                }
+            }
+
+            obj = obj[_name[i]];
         }
 
         return name;
@@ -48,24 +83,56 @@ module.exports = (function () {
         name = _init.call(this, name);
 
         this.watch.data[name].visible = !this.watch.data[name].visible;
+
+        var i, 
+            obj = _getObj.call(this, name);
+
+        if (obj.visible === undefined) {
+            for (i in obj) {
+                if (obj[i].visible !== undefined) {
+                    obj[i].visible = !obj[i].visible;
+                }
+            }
+        }
+        else {
+            obj.visible = !obj.visible;
+        }
     };
 
     Toggle.prototype.show = function (name) {
-        name = _init.call(this, name);
+        var i, 
+            obj = _getObj.call(this, name);
 
-        this.watch.data[name].visible = true;
+        if (obj.visible === undefined) {
+            for (i in obj) {
+                if (obj[i].visible !== undefined) {
+                    obj[i].visible = true;
+                }
+            }
+        }
+        else {
+            obj.visible = true;
+        }
     };
 
     Toggle.prototype.hide = function (name) {
-        name = _init.call(this, name);
+        var i, 
+            obj = _getObj.call(this, name);
 
-        this.watch.data[name].visible = false;
+        if (obj.visible === undefined) {
+            for (i in obj) {
+                if (obj[i].visible !== undefined) {
+                    obj[i].visible = false;
+                }
+            }
+        }
+        else {
+            obj.visible = false;
+        }
     };
 
     Toggle.prototype.visible = function (name) {
-        name = _init.call(this, name);
-
-        return this.watch.data[name].visible;
+        return _getObj.call(this, name).visible;
     }
 
     return function install(Vue, options) {
