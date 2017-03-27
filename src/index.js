@@ -14,7 +14,7 @@ module.exports = (function () {
         name = _toCamelCase(name);
 
         if ( ! this.watch.data[name]) {
-            this.watch.$set(this.watch.data, name, {
+            this.options.Vue.set(this.watch.data, name, {
                 visible: false
             });
         }
@@ -23,6 +23,8 @@ module.exports = (function () {
     }
 
     function Toggle(options) {
+        this.options = options;
+
         this.watch = new options.Vue({
             data: function () {
                 return {
