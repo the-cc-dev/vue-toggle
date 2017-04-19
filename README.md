@@ -18,19 +18,22 @@ Vue.use(require('@websanova/vue-toggle'));
 
 Usage is pretty straight forward.
 
-**NOTE:** You can use colons in the name for separation.
+**NOTE:** Colons or dashes can be used for separation. If using dots "." it will act on that entire object subset.
 
 ~~~
 
 this.$toggle.show('some:toggle');
-this.$toggle.hide('some:toggle');
+this.$toggle.hide('some.toggle');
 this.$toggle.visible('some:toggle');
+this.$toggle.get('some:toggle');
+this.$toggle.active('some:toggle');
 ~~~
 
-If you want to watch the toggle to trigger some other events you can pre register it. It will get the component context from where it is called in.
+To watch the toggle to trigger some other events it can e pre registered. It will get the component context from where it is called in.
 
 ~~~
 this.$toggle.register('some:toggle', function (state) {
     console.log(state); // true or false value here.
 });
 ~~~
+

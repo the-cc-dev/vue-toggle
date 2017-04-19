@@ -135,6 +135,22 @@ module.exports = (function () {
         return _getObj.call(this, name);
     };
 
+    Toggle.prototype.active = function (name) {
+        var i,
+            active = [],
+            obj = _getObj.call(this, name);
+
+        if (obj.visible === undefined) {
+            for (i in obj) {
+                if (obj[i].visible === true) {
+                    active.push(i);
+                }
+            }
+        }
+        
+        return active;
+    };
+
     return function install(Vue, options) {
         var toggle,
             register;
