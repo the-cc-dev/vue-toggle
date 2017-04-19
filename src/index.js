@@ -131,6 +131,10 @@ module.exports = (function () {
         return _getObj.call(this, name).visible;
     }
 
+    Toggle.prototype.get = function (name) {
+        return _getObj.call(this, name);
+    };
+
     return function install(Vue, options) {
         var toggle,
             register;
