@@ -80,10 +80,6 @@ module.exports = (function () {
     };
 
     Toggle.prototype.toggle = function (name) {
-        name = _init.call(this, name);
-
-        this.watch.data[name].visible = !this.watch.data[name].visible;
-
         var i, 
             obj = _getObj.call(this, name);
 
