@@ -1,20 +1,25 @@
 {
+  "version": "0.5.0", 
+  
+  "name": "@websanova/vue-toggle",
+  
+  "description": "Simple global toggle utility for Vue.js.",
+
   "author": {
     "name": "Websanova",
     "url": "http://websanova.com",
     "username": "websanova",
     "email": "rob@websanova.com"
   },
-  "dependencies": {},
-  "description": "Simple toggle plugin for Vue.js.",
-  "licenses": "MIT, GPL",
-  "devDependencies": {},
-  "keywords": ["vue", "vue.js", "toggle", "show", "hide", "visible"],
-  "main": "src/index.js",
-  "name": "@websanova/vue-toggle",
+  
   "repository": {
     "type": "git",
     "url": "https://github.com/websanova/vue-toggle"
   },
-  "version": "0.4.0"
+  
+  "licenses": "MIT, GPL",
+
+  "keywords": ["vue", "vue.js", "toggle", "show", "hide", "visible", "flip"],
+  
+  "main": "src/index.js"
 }

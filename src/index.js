@@ -83,15 +83,13 @@ module.exports = (function () {
         var i, 
             obj = _getObj.call(this, name);
 
-        if (obj.visible === undefined) {
-            for (i in obj) {
-                if (obj[i].visible !== undefined) {
-                    obj[i].visible = !obj[i].visible;
-                }
+        for (i in obj) {
+            if (i === 'visible') {
+                obj[i] = !obj[i];
             }
-        }
-        else {
-            obj.visible = !obj.visible;
+            else if (obj[i].visible !== undefined) {
+                obj[i].visible = !obj[i].visible;
+            }
         }
     };
 
@@ -99,15 +97,17 @@ module.exports = (function () {
         var i, 
             obj = _getObj.call(this, name);
 
-        if (obj.visible === undefined) {
-            for (i in obj) {
+        for (i in obj) {
+            if (i === 'visible') {
+                obj[i] = true;
+            }
+            else if (typeof obj[i] === 'object') {
                 if (obj[i].visible !== undefined) {
                     obj[i].visible = true;
                 }
+
+                this.show(name + '.' + i);
             }
-        }
-        else {
-            obj.visible = true;
         }
     };
 
@@ -115,21 +115,32 @@ module.exports = (function () {
         var i, 
             obj = _getObj.call(this, name);
 
-        if (obj.visible === undefined) {
-            for (i in obj) {
+        for (i in obj) {
+            if (i === 'visible') {
+                obj[i] = false;
+            }
+            else if (typeof obj[i] === 'object') {
                 if (obj[i].visible !== undefined) {
                     obj[i].visible = false;
                 }
+
+                this.hide(name + '.' + i);
             }
         }
-        else {
-            obj.visible = false;
-        }
+    };
+
+    Toggle.prototype.flip = function (name) {
+        var hide = name.split('.');
+
+        hide.pop();
+
+        this.hide(hide.join('.'));
+        this.show(name);
     };
 
     Toggle.prototype.visible = function (name) {
         return _getObj.call(this, name).visible;
-    }
+    };
 
     Toggle.prototype.get = function (name) {
         return _getObj.call(this, name);
@@ -140,14 +151,12 @@ module.exports = (function () {
             active = [],
             obj = _getObj.call(this, name);
 
-        if (obj.visible === undefined) {
-            for (i in obj) {
-                if (obj[i].visible === true) {
-                    active.push(i);
-                }
+        for (i in obj) {
+            if (obj[i].visible === true) {
+                active.push(i);
             }
         }
-        
+
         return active;
     };
 

@@ -24,6 +24,7 @@ Usage is pretty straight forward.
 
 this.$toggle.show('some:toggle');
 this.$toggle.hide('some.toggle');
+this.$toggle.flip('some.toggle');
 this.$toggle.visible('some:toggle');
 this.$toggle.get('some:toggle');
 this.$toggle.active('some:toggle');
